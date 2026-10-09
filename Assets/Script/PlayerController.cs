@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Kornkrit
+namespace Korakit
 {
     public class PlayerController : MonoBehaviour
     {
@@ -18,7 +18,7 @@ namespace Kornkrit
         private float NormalSpeed = 5;
 
         [SerializeField]
-        private float RunSpeed = 5;
+        private float RunSpeed = 10;
         private float currentSpeed;
 
         [SerializeField]

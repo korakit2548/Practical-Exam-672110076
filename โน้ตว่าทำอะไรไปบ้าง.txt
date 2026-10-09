@@ -1,0 +1,13 @@
+Q.2 Stage 1 -การสร้างและใช้งาน Capsule player ตามบทเรียน (Capsule Player Configuration) (5 คะแนน)
+สร้าง Capsule Player
+เพิ่ม Capsule Collider Rigidbody
+Player Input ใช้ New Input Actions
+Player Controller Script ใช้จัดการการเดิน วิ่ง กระโดด
+สร้างกล้อง Cinemachine Camera ใช้ควบคุมกล้องแบบ Third-Person
+
+Q.4 Stage 1 - ไอเท็มและสิ่งกีดขวาง (Items and obstacles) (5 คะแนน)
+สร้าง Enum itemType สี่ประเภท
+สร้างสคริปต์  CollectibleItem โดยใช้ switch case (itemType) ในการบอกว่าแต่ละอย่างทำอะไร
+นำไปติดกับ ไอเท็ม Prefab ทั้งสี่ชนิด 
+
+TimerManager และ ScoreManager ในการคำนวน อัปเดต และแสดงผลเวลาและคะแนน
