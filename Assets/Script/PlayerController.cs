@@ -29,13 +29,6 @@ namespace Korakit
         [SerializeField]
         float RotationSpeed = 1;
 
-        [SerializeField]
-        private GameObject HurtUI;
-
-        [SerializeField]
-        private float gameOverDelay = 0.2f;
-        private float gameOverTimer;
-
         private Camera MainCamera;
         public void Awake()
         {
@@ -43,7 +36,6 @@ namespace Korakit
 
             Rb = GetComponent<Rigidbody>();
             currentSpeed = NormalSpeed;
-            gameOverTimer = gameOverDelay;
         }
 
         public void OnMove(InputAction.CallbackContext context)
