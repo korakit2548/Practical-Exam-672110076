@@ -8,8 +8,6 @@ namespace Korakit
         private Rigidbody Rb;
         private Vector2 moveInput;
 
-        [SerializeField]
-        private Animator animator;
         private bool isRunning;
         private bool isIdle;
         private bool isWalking;

@@ -9,13 +9,17 @@ Q.4 Stage 1 - ไอเท็มและสิ่งกีดขวาง (Item
 สร้าง Enum itemType สี่ประเภท
 สร้างสคริปต์  CollectibleItem โดยใช้ switch case (itemType) ในการบอกว่าแต่ละอย่างทำอะไร
 นำไปติดกับ ไอเท็ม Prefab ทั้งสี่ชนิด 
-TimerManager และ ScoreManager ในการคำนวน อัปเดต และแสดงผลเวลาและคะแนน
+สคริปต์ TimerManager และ ScoreManager ในการคำนวน อัปเดต และแสดงผลเวลาและคะแนน
 
 Q.1 การเชื่อมต่อของฉากเป็นไปอย่างสมบูรณ์ ตามข้อกำหนดและไม่มีข้อบกพร่อง (10 คะแนน)
 สร้าง Scene
 Main Menu, Stage Selection และ panel Option ใน Main Menu
 Gameplay Scene
-สร้าง Win/Loss Panel สำหรับแสดงเมื่อแพ้/=ot
+สร้าง Win/Lose Panel สำหรับแสดงเมื่อแพ้/ชนะ
 ใช้สคริปต์ Scene Management เพื่อจัดการการเปลี่ยน Scene และควบคุมการเปิด–ปิด Panel
 กำหนดฟังก์ชันให้ปุ่มผ่าน Button On Click()
 เตรียมระบบแสดงผล Win และ Loss เพื่อเชื่อมต่อกับเงื่อนไขการชนะและแพ้ของ Game
+
+Q.5 Stage 1 - เงื่อนไขของการชนะและการแพ้(Winning and losing conditions)
+แก้ไข TimeManager เพิ่มเงื่อนไขเมื่อเวลาหมดแล้วตรวจคะแนน แล้วแสดงหน้า Win/Lose
+สร้างสคริปต์ FallDetector ถ้า player ตกจากความสูงที่กำหนดจะขึ้นหน้าแพ้

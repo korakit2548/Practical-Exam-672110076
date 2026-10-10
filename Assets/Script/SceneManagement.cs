@@ -1,4 +1,6 @@
 using UnityEngine;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 namespace Korakit
 {
@@ -11,7 +13,12 @@ namespace Korakit
         [Header("Panels")]
         [SerializeField] private GameObject optionPanel;
         [SerializeField] private GameObject winPanel;
-        [SerializeField] private GameObject lossPanel;
+        [SerializeField] private GameObject losePanel;
+
+        [SerializeField] private TMP_Text winScoreText;
+        [SerializeField] private TMP_Text loseScoreText;
+
+        private bool gameEnded = false;
 
         // Main Menu
         public void StartGame()
@@ -64,17 +71,45 @@ namespace Korakit
             if (winPanel != null)
                 winPanel.SetActive(true);
 
-            if (lossPanel != null)
-                lossPanel.SetActive(false);
+            if (losePanel != null)
+                losePanel.SetActive(false);
         }
 
-        public void ShowLossPanel()
+        public void ShowLosePanel()
         {
-            if (lossPanel != null)
-                lossPanel.SetActive(true);
+            if (losePanel != null)
+                losePanel.SetActive(true);
 
             if (winPanel != null)
                 winPanel.SetActive(false);
+        }
+
+        public void WinGame()
+        {
+            if (gameEnded) return;
+
+            gameEnded = true;
+            UpdateResultScore(winScoreText);
+            ShowWinPanel();
+        }
+        public void LoseGame()
+        {
+            if (gameEnded) return;
+
+            gameEnded = true;
+            UpdateResultScore(loseScoreText);
+            ShowLosePanel();
+        }
+        private void UpdateResultScore(TMP_Text scoreText)
+        {
+            if (scoreText == null)
+                return;
+
+            int finalScore = ScoreManager.Instance != null
+                ? ScoreManager.Instance.score
+                : 0;
+
+            scoreText.text = "Score: " + finalScore;
         }
 
         // Shared

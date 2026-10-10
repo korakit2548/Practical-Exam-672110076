@@ -35,7 +35,21 @@ namespace Korakit
             {
                 RemainingTime = 0f;
                 IsTimeUp = true;
-                Debug.Log("Time's Up!");
+                UpdateTimerUI();
+
+                SceneManagement manager = FindFirstObjectByType<SceneManagement>();
+
+                if (manager != null)
+                {
+                    if (ScoreManager.Instance != null && ScoreManager.Instance.score > 9999)
+                    {
+                        manager.WinGame();
+                    }
+                    else
+                    {
+                        manager.LoseGame();
+                    }
+                }
             }
 
             UpdateTimerUI();
