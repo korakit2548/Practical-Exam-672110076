@@ -6,18 +6,40 @@ namespace Korakit
     {
         public ItemType itemType;
 
-        private PlayerController nearbyPlayer;
+        [SerializeField] private GameObject interactPrompt;
 
+        private PlayerController nearbyPlayer;
+        private Camera mainCamera;
+
+        private void Awake() 
+        { 
+            mainCamera = Camera.main;
+            if (interactPrompt != null)
+            {
+                interactPrompt.SetActive(false);
+            }
+        }
+        private void LateUpdate()
+        {
+            if (interactPrompt == null || mainCamera == null) 
+                return;
+
+            interactPrompt.transform.rotation = Quaternion.LookRotation(interactPrompt.transform.position - mainCamera.transform.position);
+        }    
         private void OnTriggerEnter(Collider other)
         {
-            PlayerController player =
-                other.GetComponentInParent<PlayerController>();
+            PlayerController player = other.GetComponentInParent<PlayerController>();
 
             if (player == null)
                 return;
 
             nearbyPlayer = player;
             nearbyPlayer.SetNearbyItem(this);
+
+            if (interactPrompt != null)
+            {
+                interactPrompt.SetActive(true);
+            }
         }
 
         private void OnTriggerExit(Collider other)
@@ -30,6 +52,11 @@ namespace Korakit
 
             player.SetNearbyItem(null);
             nearbyPlayer = null;
+
+            if (interactPrompt != null)
+            {
+                interactPrompt.SetActive(false);
+            }
         }
 
         public void Interact()

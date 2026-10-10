@@ -25,4 +25,22 @@ Q.5 Stage 1 - เงื่อนไขของการชนะและกา
 สร้างสคริปต์ FallDetector ถ้า player ตกจากความสูงที่กำหนดจะขึ้นหน้าแพ้
 
 Q.3 Stage 1 - งานออกแบบฉาก(Level Design)
-ใช้ Probuilder สร้าง platfrom กระโดด และวาง prefab item ต่างๆ
+ใช้ Probuilder สร้าง platfrom กระโดด และวาง prefab item ต่างๆ	
+
+Q.6 Stage 2 - Humanoid Player Configuration 
+ใช้ Ch49_nonPBR เป็น player
+ตัดส่วนหนึ่งของ animation Ch02_nonPBR@Booty Hip Hop Dance มาเป็นท่าเดินวิ่ง
+ตัดส่วนหนึ่งของ animation Ch02_nonPBR@Chicken Dance มาเป็นท่าลอย
+ใช้ Ch02_nonPBR@Happy Idle เป็น Idle
+เพิ่ม Input Action Interact เป็นตัว E
+
+Q.7 Stage 2 - Level Design
+ใช้ Probuilder สร้าง platfrom กระโดด และวาง prefab item ต่างๆ	
+
+Q.8 Stage 2 - ไอเท็มและสิ่งกีดขวาง (Items and obstacles) ใช้งานระบบ Interaction เก็บไอเท็ม
+สร้างสคริปต์ InteractCollectible เหมือน CollectibleItem แต่มีการตรวจ OnTrigger ว่า player เข้าระยะรึยัง
+ถ้าเข้าระยะจะเซ็ตตัวเองเป็น SetNearbyItem ของ player
+มีฟังก์ขัน Interact ไว้เก็บ item
+ที่ PlayerController เพื่ม SetNearbyItem และ Oninteract ไว้เรียก Interact ของไอเท็ม
+สร้าง prefab ใหม่เป็นเป็นเวอชั่น Interact
+ติดป้ายตัว E ไว้เวลาเขาใกล้จะโชว์ขึ้นมาและหันตามกล้อง
