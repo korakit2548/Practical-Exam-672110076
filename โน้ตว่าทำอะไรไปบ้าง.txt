@@ -23,3 +23,6 @@ Gameplay Scene
 Q.5 Stage 1 - เงื่อนไขของการชนะและการแพ้(Winning and losing conditions)
 แก้ไข TimeManager เพิ่มเงื่อนไขเมื่อเวลาหมดแล้วตรวจคะแนน แล้วแสดงหน้า Win/Lose
 สร้างสคริปต์ FallDetector ถ้า player ตกจากความสูงที่กำหนดจะขึ้นหน้าแพ้
+
+Q.3 Stage 1 - งานออกแบบฉาก(Level Design)
+ใช้ Probuilder สร้าง platfrom กระโดด และวาง prefab item ต่างๆ

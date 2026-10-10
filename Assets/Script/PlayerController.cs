@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 namespace Korakit
@@ -7,6 +8,7 @@ namespace Korakit
     {
         private Rigidbody Rb;
         private Vector2 moveInput;
+        private Animator animator;
 
         private bool isRunning;
         private bool isIdle;
@@ -28,10 +30,14 @@ namespace Korakit
         float RotationSpeed = 1;
 
         private Camera MainCamera;
+
+        private InteractCollectible nearbyItem;
+
+
         public void Awake()
         {
             MainCamera = Camera.main;
-
+            animator = GetComponentInChildren<Animator>();
             Rb = GetComponent<Rigidbody>();
             currentSpeed = NormalSpeed;
         }
@@ -39,17 +45,8 @@ namespace Korakit
         public void OnMove(InputAction.CallbackContext context)
         {
             moveInput = context.ReadValue<Vector2>();
-            if (moveInput != Vector2.zero)
-            {
-                isWalking = true;
-                isIdle = false;
-            }
-            else
-            {
-                isWalking = false;
-                isIdle = true;
-            }
-
+            isWalking = moveInput.sqrMagnitude > 0.01f;
+            isIdle = !isWalking;
         }
         public void OnRun(InputAction.CallbackContext context)
         {
@@ -72,6 +69,21 @@ namespace Korakit
                 Rb.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
                 isGrounded = false;
             }
+        }
+        public void OnInteract(InputAction.CallbackContext context)
+        {
+            if (!context.performed)
+                return;
+
+            if (nearbyItem != null)
+            {
+                nearbyItem.Interact();
+            }
+        }
+
+        public void SetNearbyItem(InteractCollectible item)
+        {
+            nearbyItem = item;
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -103,6 +115,17 @@ namespace Korakit
                     Quaternion.Slerp( Rb.rotation, targetRotation, RotationSpeed * Time.fixedDeltaTime )
                 );
             }
+
+            Animation();
+        }
+
+        public void Animation()
+        {
+            if (animator == null)
+                return;
+            animator.SetBool("isGrounded", isGrounded); 
+            animator.SetBool("IsWalking", isWalking && !isRunning); 
+            animator.SetBool("IsRunning", isWalking && isRunning);
         }
         
     }
