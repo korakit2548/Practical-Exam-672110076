@@ -12,10 +12,10 @@ EditorBuildSettings:
     path: Assets/Scenes/StageSelection.unity
     guid: a3b64e90ab36d444595d24f34fe8ecb1
   - enabled: 1
-    path: Assets/Scenes/Capsule Player.unity
+    path: Assets/Scenes/Humanoid Player.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Scenes/Humanoid Player.unity
+    path: Assets/Scenes/Capsule Player.unity
     guid: 3420790e753c02040a04b2e2129634cc
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

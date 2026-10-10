@@ -4,10 +4,6 @@ using UnityEngine.SceneManagement;
 
 namespace Korakit
 {
-
-    using UnityEngine;
-    using UnityEngine.SceneManagement;
-
     public class SceneManagement : MonoBehaviour
     {
         [Header("Panels")]
@@ -18,6 +14,7 @@ namespace Korakit
         [SerializeField] private TMP_Text winScoreText;
         [SerializeField] private TMP_Text loseScoreText;
 
+        [SerializeField] private PlayerController playerController;
         private bool gameEnded = false;
 
         // Main Menu
@@ -89,6 +86,7 @@ namespace Korakit
             if (gameEnded) return;
 
             gameEnded = true;
+            StopPlayer();
             UpdateResultScore(winScoreText);
             ShowWinPanel();
         }
@@ -97,6 +95,7 @@ namespace Korakit
             if (gameEnded) return;
 
             gameEnded = true;
+            StopPlayer();
             UpdateResultScore(loseScoreText);
             ShowLosePanel();
         }
@@ -112,6 +111,13 @@ namespace Korakit
             scoreText.text = "Score: " + finalScore;
         }
 
+        private void StopPlayer()
+        {
+            if (playerController != null)
+            {
+                playerController.enabled = false;
+            }
+        }
         // Shared
         public void LoadScene(string sceneName)
         {

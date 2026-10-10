@@ -7,10 +7,8 @@ namespace Korakit
     {
         public static TimerManager Instance { get; private set; }
 
-        [SerializeField]
-        public float startTime = 30f;
-        [SerializeField]
-        public TMP_Text timerText;
+        [SerializeField] public float startTime = 30f;
+        [SerializeField] public TMP_Text timerText;
 
         public float RemainingTime { get; private set; }
         public bool IsTimeUp { get; private set; }
@@ -34,22 +32,7 @@ namespace Korakit
             if (RemainingTime <= 0f)
             {
                 RemainingTime = 0f;
-                IsTimeUp = true;
-                UpdateTimerUI();
-
-                SceneManagement manager = FindFirstObjectByType<SceneManagement>();
-
-                if (manager != null)
-                {
-                    if (ScoreManager.Instance != null && ScoreManager.Instance.score > 9999)
-                    {
-                        manager.WinGame();
-                    }
-                    else
-                    {
-                        manager.LoseGame();
-                    }
-                }
+                EndGameByTime();
             }
 
             UpdateTimerUI();
@@ -67,15 +50,63 @@ namespace Korakit
             if (IsTimeUp)
                 return;
 
-            RemainingTime = Mathf.Max(0f, RemainingTime - amount);
+            RemainingTime -= amount;
 
             if (RemainingTime <= 0f)
             {
+                RemainingTime = 0f;
                 IsTimeUp = true;
-                Debug.Log("Time's Up!");
+                UpdateTimerUI();
+
+                Debug.Log("เวลาเหลือ 0 จากการเก็บ Item");
+
+                SceneManagement manager =
+                    FindFirstObjectByType<SceneManagement>();
+
+                if (manager != null)
+                {
+                    int finalScore = ScoreManager.Instance != null
+                        ? ScoreManager.Instance.score
+                        : 0;
+
+                    if (finalScore > 9999)
+                        manager.WinGame();
+                    else
+                        manager.LoseGame();
+                }
+                else
+                {
+                    Debug.LogError("ไม่พบ SceneManagement ใน Scene นี้");
+                }
+
+                return;
             }
 
             UpdateTimerUI();
+        }
+        private void EndGameByTime()
+        {
+            if (IsTimeUp)
+                return;
+
+            IsTimeUp = true;
+            UpdateTimerUI();
+
+            SceneManagement manager = FindFirstObjectByType<SceneManagement>();
+
+            int finalScore = ScoreManager.Instance != null ? ScoreManager.Instance.score : 0;
+
+            if (manager != null)
+            {
+                if (finalScore > 9999)
+                {
+                    manager.WinGame();
+                }
+                else
+                {
+                    manager.LoseGame();
+                }
+            }
         }
         private void UpdateTimerUI()
         {
@@ -83,7 +114,8 @@ namespace Korakit
                 return;
 
             int seconds = Mathf.CeilToInt(RemainingTime);
-            timerText.text = $"Time: {seconds / 60:00}:{seconds % 60:00}";
+            timerText.text =
+                $"Time: {seconds / 60:00}:{seconds % 60:00}";
         }
     }
 }
