@@ -1,61 +1,41 @@
+
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace Korakit
 {
     public class InteractCollectible : MonoBehaviour
     {
         public ItemType itemType;
+
+        [Header("Sound")]
         [SerializeField] private AudioClip collectSound;
-        [SerializeField] private GameObject interactPrompt;
+        [SerializeField] private AudioMixerGroup sfxGroup;
 
         private PlayerController nearbyPlayer;
-        private Camera mainCamera;
 
-        private void Awake() 
-        { 
-            mainCamera = Camera.main;
-            if (interactPrompt != null)
-            {
-                interactPrompt.SetActive(false);
-            }
-        }
-        private void LateUpdate()
-        {
-            if (interactPrompt == null || mainCamera == null) 
-                return;
-
-            interactPrompt.transform.rotation = Quaternion.LookRotation(interactPrompt.transform.position - mainCamera.transform.position);
-        }    
         private void OnTriggerEnter(Collider other)
         {
-            PlayerController player = other.GetComponentInParent<PlayerController>();
+            PlayerController player =
+                other.GetComponentInParent<PlayerController>();
 
             if (player == null)
                 return;
 
             nearbyPlayer = player;
             nearbyPlayer.SetNearbyItem(this);
-
-            if (interactPrompt != null)
-            {
-                interactPrompt.SetActive(true);
-            }
         }
 
         private void OnTriggerExit(Collider other)
         {
-            PlayerController player = other.GetComponentInParent<PlayerController>();
+            PlayerController player =
+                other.GetComponentInParent<PlayerController>();
 
             if (player == null || player != nearbyPlayer)
                 return;
 
             player.SetNearbyItem(null);
             nearbyPlayer = null;
-
-            if (interactPrompt != null)
-            {
-                interactPrompt.SetActive(false);
-            }
         }
 
         public void Interact()
@@ -87,15 +67,32 @@ namespace Korakit
                         ScoreManager.Instance.ReduceScore(500);
                     break;
             }
-            if (collectSound != null)
-            {
-                AudioSource.PlayClipAtPoint(
-                    collectSound,
-                    transform.position
-                );
-            }
+
+            PlayCollectSound();
+
             nearbyPlayer.SetNearbyItem(null);
+            nearbyPlayer = null;
+
             Destroy(gameObject);
+        }
+
+        private void PlayCollectSound()
+        {
+            if (collectSound == null)
+                return;
+
+            GameObject soundObject =
+                new GameObject("CollectibleSound");
+
+            AudioSource source =
+                soundObject.AddComponent<AudioSource>();
+
+            source.clip = collectSound;
+            source.outputAudioMixerGroup = sfxGroup;
+            source.spatialBlend = 0f;
+            source.Play();
+
+            Destroy(soundObject, collectSound.length);
         }
     }
 }

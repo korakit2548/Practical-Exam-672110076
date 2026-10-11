@@ -1,4 +1,6 @@
+
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace Korakit
 {
@@ -8,6 +10,7 @@ namespace Korakit
 
         [Header("Sound")]
         [SerializeField] private AudioClip collectSound;
+        [SerializeField] private AudioMixerGroup sfxGroup;
 
         private void OnTriggerEnter(Collider other)
         {
@@ -39,12 +42,22 @@ namespace Korakit
                     break;
             }
 
-            // Play sound when collecting the item
             if (collectSound != null)
             {
-                AudioSource.PlayClipAtPoint(
-                    collectSound,
-                    transform.position
+                GameObject soundObject =
+                    new GameObject("CollectibleSound");
+
+                AudioSource source =
+                    soundObject.AddComponent<AudioSource>();
+
+                source.clip = collectSound;
+                source.outputAudioMixerGroup = sfxGroup;
+                source.spatialBlend = 0f;
+                source.Play();
+
+                Destroy(
+                    soundObject,
+                    collectSound.length
                 );
             }
 

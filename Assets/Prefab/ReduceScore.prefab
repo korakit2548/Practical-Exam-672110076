@@ -127,3 +127,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Kornkrit.CollectibleItem
   itemType: 3
   collectSound: {fileID: 8300000, guid: a89671a3158196c4ba1cc04e37bb36d9, type: 3}
+  sfxGroup: {fileID: 5136352567230374231, guid: ff15dc2bb9ce51f4ebf37a2caec5e392, type: 2}

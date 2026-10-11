@@ -204,7 +204,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Korakit.InteractCollectible
   itemType: 0
   collectSound: {fileID: 8300000, guid: 35c05b0ceeb57774196cb632ba88c8b1, type: 3}
-  interactPrompt: {fileID: 6898441685012822237}
+  sfxGroup: {fileID: 5136352567230374231, guid: ff15dc2bb9ce51f4ebf37a2caec5e392, type: 2}
 --- !u!1 &4230907069182276693
 GameObject:
   m_ObjectHideFlags: 0

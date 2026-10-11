@@ -202,9 +202,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 445a87e571aff9045b7632591deaa25a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Korakit.InteractCollectible
-  itemType: 3
+  itemType: 1
   collectSound: {fileID: 8300000, guid: 0a66fd11e7a1c0348a39393ee0eb405e, type: 3}
-  interactPrompt: {fileID: 6898441685012822237}
+  sfxGroup: {fileID: 5136352567230374231, guid: ff15dc2bb9ce51f4ebf37a2caec5e392, type: 2}
 --- !u!1 &4230907069182276693
 GameObject:
   m_ObjectHideFlags: 0
