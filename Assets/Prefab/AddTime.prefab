@@ -126,3 +126,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Kornkrit.CollectibleItem
   itemType: 0
+  collectSound: {fileID: 8300000, guid: 35c05b0ceeb57774196cb632ba88c8b1, type: 3}

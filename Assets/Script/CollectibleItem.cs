@@ -6,12 +6,16 @@ namespace Korakit
     {
         public ItemType itemType;
 
+        [Header("Sound")]
+        [SerializeField] private AudioClip collectSound;
+
         private void OnTriggerEnter(Collider other)
         {
             if (!other.CompareTag("Player"))
                 return;
 
-            if (TimerManager.Instance == null || TimerManager.Instance.IsTimeUp)
+            if (TimerManager.Instance == null ||
+                TimerManager.Instance.IsTimeUp)
                 return;
 
             switch (itemType)
@@ -25,16 +29,26 @@ namespace Korakit
                     break;
 
                 case ItemType.AddScore:
-                    ScoreManager.Instance.AddScore(500);
+                    if (ScoreManager.Instance != null)
+                        ScoreManager.Instance.AddScore(500);
                     break;
 
                 case ItemType.ReduceScore:
-                    ScoreManager.Instance.ReduceScore(500);
+                    if (ScoreManager.Instance != null)
+                        ScoreManager.Instance.ReduceScore(500);
                     break;
             }
 
-            Destroy(gameObject);
+            // Play sound when collecting the item
+            if (collectSound != null)
+            {
+                AudioSource.PlayClipAtPoint(
+                    collectSound,
+                    transform.position
+                );
+            }
 
+            Destroy(gameObject);
         }
     }
 }

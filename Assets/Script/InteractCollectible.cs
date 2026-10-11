@@ -5,7 +5,7 @@ namespace Korakit
     public class InteractCollectible : MonoBehaviour
     {
         public ItemType itemType;
-
+        [SerializeField] private AudioClip collectSound;
         [SerializeField] private GameObject interactPrompt;
 
         private PlayerController nearbyPlayer;
@@ -44,8 +44,7 @@ namespace Korakit
 
         private void OnTriggerExit(Collider other)
         {
-            PlayerController player =
-                other.GetComponentInParent<PlayerController>();
+            PlayerController player = other.GetComponentInParent<PlayerController>();
 
             if (player == null || player != nearbyPlayer)
                 return;
@@ -88,7 +87,13 @@ namespace Korakit
                         ScoreManager.Instance.ReduceScore(500);
                     break;
             }
-
+            if (collectSound != null)
+            {
+                AudioSource.PlayClipAtPoint(
+                    collectSound,
+                    transform.position
+                );
+            }
             nearbyPlayer.SetNearbyItem(null);
             Destroy(gameObject);
         }
